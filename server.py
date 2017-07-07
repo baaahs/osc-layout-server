@@ -14,6 +14,9 @@ class OSCLayoutServer(object):
     def __init__(self):
         _layouts_path = os.path.join(os.path.dirname(__file__), self.layouts_directory)
         self.layouts = set(os.listdir(_layouts_path))
+        
+        if not self.layouts:
+            raise RuntimeError('There are no layouts in the layout directory selected')        
 
     @cherrypy.expose
     def index(self):
