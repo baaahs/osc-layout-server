@@ -7,13 +7,11 @@ class OSCLayoutServer(object):
 
     osc_zipfile = 'index.xml'
     layouts_directory = 'layouts'
-    ttl_cache_timeout_in_seconds = 60
-    cache_max_entries = 20
-    cache = TTLCache(maxsize=cache_max_entries, ttl=ttl_cache_timeout_in_seconds)
 
-    def __init__(self):
-        _layouts_path = os.path.join(os.path.dirname(__file__), self.layouts_directory)
+    def __init__(self, layouts_dir, cache_ttl, cache_max_entries):
+        _layouts_path = os.path.join(os.path.dirname(__file__), layouts_dir)
         self.layouts = set(os.listdir(_layouts_path))
+        self.cache = TTLCache(maxsize=cache_max_entries, ttl=cache_ttl)
         
         if not self.layouts:
             raise RuntimeError('There are no layouts in the layout directory selected')        
