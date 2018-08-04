@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python2.7
 import cherrypy
 from server import OSCLayoutServer
 import argparse
